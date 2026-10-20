@@ -1,0 +1,7 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const { title, summary, role, tech, repo, demo, report, status } = project.data;
+---
+<article class="card"><p class="card-meta">{status === 'in-progress' ? 'In progress' : role}</p><h3 class="card-title"><a href={`/projects/${project.id}`}>{title}</a></h3><p class="card-summary">{summary}</p><ul class="tag-list" aria-label="Technologies used">{tech.slice(0, 4).map((item) => <li class="tag">{item}</li>)}{tech.length > 4 && <li class="tag">+{tech.length - 4}</li>}</ul><div class="card-footer"><a href={`/projects/${project.id}`} class="btn btn-secondary">Details <span aria-hidden="true">→</span></a><div class="card-links">{repo && <a class="external" href={repo} target="_blank" rel="noopener noreferrer">Repo<span class="sr-only"> (opens in new tab)</span></a>}{demo && <a class="external" href={demo} target="_blank" rel="noopener noreferrer">Demo<span class="sr-only"> (opens in new tab)</span></a>}{report && <a class="external" href={report} target="_blank" rel="noopener noreferrer">Report<span class="sr-only"> (opens in new tab)</span></a>}</div></div></article>

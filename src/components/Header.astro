@@ -1,0 +1,21 @@
+---
+import { site } from '../config/site';
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => path === '/' ? currentPath === '/' : currentPath.startsWith(path);
+---
+<header class="site-header"><div class="container header-inner">
+  <a href="/" class="logo-link" aria-label={`${site.name} home`}>{site.name}</a>
+  <div class="header-actions"><nav id="primary-nav" aria-label="Main navigation"><ul class="nav-menu">
+    {site.navLinks.map((link) => <li><a href={link.href} class:list={['nav-link', { active: isActive(link.href) }]} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a></li>)}
+  </ul></nav>
+  <button type="button" id="theme-toggle" class="icon-button theme-toggle" aria-label="Switch theme" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+  <button type="button" id="menu-toggle" class="icon-button menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div>
+</div></header>
+<script>
+  const root = document.documentElement, themeToggle = document.querySelector('#theme-toggle');
+  themeToggle?.addEventListener('click', () => { const dark = root.dataset.theme === 'dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches); const next = dark ? 'light' : 'dark'; root.dataset.theme = next; themeToggle.setAttribute('aria-pressed', String(next === 'dark')); try { localStorage.setItem('theme', next); } catch (_) {} });
+  const menuToggle = document.querySelector('#menu-toggle'), nav = document.querySelector('#primary-nav');
+  const closeMenu = () => { nav?.classList.remove('is-open'); menuToggle?.setAttribute('aria-expanded', 'false'); };
+  menuToggle?.addEventListener('click', () => { const open = !nav?.classList.contains('is-open'); nav?.classList.toggle('is-open', open); menuToggle?.setAttribute('aria-expanded', String(open)); });
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu)); document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+</script>

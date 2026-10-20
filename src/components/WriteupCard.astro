@@ -1,0 +1,7 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { writeup: CollectionEntry<'writeups'>; }
+const { writeup } = Astro.props;
+const { title, platform, level, date, tags, summary } = writeup.data;
+---
+<article class="card"><p class="card-meta">{platform} · {level}</p><h3 class="card-title"><a href={`/writeups/${writeup.id}`}>{title}</a></h3><p class="card-summary">{summary}</p><ul class="tag-list" aria-label="Writeup topics">{tags.map((tag) => <li class="tag">{tag}</li>)}</ul><div class="card-footer"><time class="muted" datetime={new Date(date).toISOString()}>{new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time><a href={`/writeups/${writeup.id}`} class="btn btn-secondary">Read <span aria-hidden="true">→</span></a></div></article>

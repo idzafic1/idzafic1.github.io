@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() { const writeups = await getCollection('writeups'); return writeups.map((writeup) => ({ params: { slug: writeup.id }, props: { writeup } })); }
+const { writeup } = Astro.props; const { title, platform, level, date, tags, summary } = writeup.data; const { Content } = await render(writeup);
+---
+<BaseLayout title={title} description={summary}><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/writeups">Writeups</a> <span aria-hidden="true">/</span> {title}</nav><header class="page-header"><p class="eyebrow">{platform} · {level}</p><h1>{title}</h1><p>{summary}</p></header><div class="meta-panel" style="margin-bottom:var(--space-8)"><div class="meta-label">Published</div><time datetime={new Date(date).toISOString()}>{new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time><ul class="tag-list" style="margin-top:var(--space-4)">{tags.map((tag) => <li class="tag">{tag}</li>)}</ul></div><p class="notice">Passwords and flags are intentionally omitted.</p><article class="prose"><Content /></article></div></BaseLayout>

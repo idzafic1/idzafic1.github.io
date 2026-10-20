@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WriteupCard from '../../components/WriteupCard.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../config/site';
+const writeups = (await getCollection('writeups')).sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+<BaseLayout title="Writeups" description="Security writeups and learning notes by Ismail Džafić. Passwords and flags are intentionally omitted."><div class="container"><header class="page-header"><p class="eyebrow">Security notes</p><h1>Writeups</h1><p>Selected notes from hands-on security learning. The main collection lives on an external site.</p></header><section class="callout"><h2>Bandit writeups</h2><p class="muted">Explore the full OverTheWire Bandit collection with Markdown and terminal commands. Passwords and flags are intentionally omitted.</p><div class="button-row"><a class="btn btn-primary" href={site.bandit.site} target="_blank" rel="noopener noreferrer">Visit external site ↗</a><a class="btn btn-secondary" href={site.bandit.repo} target="_blank" rel="noopener noreferrer">Repository ↗</a></div></section><p class="notice">Passwords and flags are intentionally omitted.</p><section class="section" style="padding-top:0"><div class="card-grid">{writeups.map((writeup) => <WriteupCard writeup={writeup} />)}</div></section></div></BaseLayout>

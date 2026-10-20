@@ -1,0 +1,10 @@
+---
+import { site, isConfigured } from '../config/site';
+const currentYear = new Date().getFullYear();
+---
+<footer class="site-footer"><div class="container footer-inner"><div><p class="footer-kicker">Built with Astro. Hosted on GitHub Pages.</p><p class="footer-copy">© {currentYear} {site.name}</p></div><nav aria-label="Footer links"><ul class="footer-links">
+  <li><a href={site.github} target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in new tab)</span></a></li>
+  {isConfigured(site.email) && <li><a href={`mailto:${site.email}`}>Email</a></li>}
+  {isConfigured(site.linkedin) && <li><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a></li>}
+  <li><a href={site.cvPath} download>CV</a></li>
+</ul></nav></div></footer>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project, projects } }));
+}
+
+const { project, projects } = Astro.props;
+const { title, summary, role, tech, repo, demo, report, period, team, status } = project.data;
+const { Content } = await render(project);
+const index = projects.findIndex((item) => item.id === project.id);
+const previous = projects[index - 1];
+const next = projects[index + 1];
+---
+<BaseLayout title={title} description={summary}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/projects">Projects</a> <span aria-hidden="true">/</span> {title}</nav>
+    <header class="page-header"><p class="eyebrow">{status === 'in-progress' ? 'In progress' : 'Project detail'}</p><h1>{title}</h1><p>{summary}</p></header>
+    <div class="project-layout">
+      <aside class="meta-panel" aria-label="Project metadata">
+        <div class="meta-row"><div class="meta-label">Role</div><div>{role}</div></div>
+        {team && <div class="meta-row"><div class="meta-label">Team size</div><div>{team}</div></div>}
+        {period && <div class="meta-row"><div class="meta-label">Period</div><div>{period}</div></div>}
+        <div class="meta-row"><div class="meta-label">Tech</div><ul class="tag-list">{tech.map((item) => <li class="tag">{item}</li>)}</ul></div>
+        {(repo || demo || report) && <div class="meta-row"><div class="meta-label">Links</div><div class="card-links">{repo && <a href={repo} target="_blank" rel="noopener noreferrer">Repository ↗</a>}{demo && <a href={demo} target="_blank" rel="noopener noreferrer">Live demo ↗</a>}{report && <a href={report} target="_blank" rel="noopener noreferrer">Report PDF ↗</a>}</div></div>}
+      </aside>
+      <article class="prose"><Content /></article>
+    </div>
+    <nav class="project-nav" aria-label="Project navigation">{previous ? <a href={`/projects/${previous.id}`}>← {previous.data.title}</a> : <span></span>}{next ? <a href={`/projects/${next.id}`}>{next.data.title} →</a> : <a href="/projects">All projects →</a>}</nav>
+  </div>
+</BaseLayout>
