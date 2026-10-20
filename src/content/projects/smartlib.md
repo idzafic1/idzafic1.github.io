@@ -33,4 +33,4 @@ Core data schemas, catalog search, and reservation workflows are implemented and
 
 ## What I learned
 
-Managing development across an 8-person team emphasizes the critical need for automated integration testing, branching discipline, and centralized database migration scripts.
+To be added (project currently in progress).
