@@ -1,21 +1,154 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { site, isConfigured } from '../config/site';
-const featuredProjects = (await getCollection('projects')).filter((project) => project.data.featured).sort((a, b) => a.data.order - b.data.order).slice(0, 4);
-const focusAreas = [['API & functional testing', 'Functional and regression API testing with Postman, with attention to reliable behavior and edge cases.'], ['Performance & load testing', 'Load and stress testing to examine latency and throughput under concurrent users with k6 and Apache JMeter.'], ['Security-minded testing', 'White-box security testing and memory analysis to verify that sensitive data is handled responsibly.']];
-const skills = { Testing: ['API testing (Postman & Newman)', 'Load & stress testing (k6, JMeter)', 'Functional and regression testing', 'White-box testing', 'Memory analysis'], Languages: ['C#', 'C++', 'C', 'Java', 'SQL', 'HTML/CSS/JS', 'Python', 'TypeScript'], Tools: ['Git', 'Linux', 'Postman', 'k6', 'Apache JMeter', 'Node.js', 'Neon', 'Vercel'] };
-const jsonLd = { '@context': 'https://schema.org', '@type': 'Person', name: site.name, url: Astro.site, sameAs: [site.github, site.linkedin].filter(isConfigured) };
+
+const hasCv = fs.existsSync(path.resolve('./public/cv/Ismail_Dzafic_CV.pdf'));
+const featuredProjects = (await getCollection('projects'))
+  .filter((project) => project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+
+const focusAreas = [
+  ['API & functional testing', 'Functional and regression API testing with Postman, with attention to reliable behavior and edge cases.'],
+  ['Performance & load testing', 'Load and stress testing to examine latency and throughput under concurrent users with k6 and Apache JMeter.'],
+  ['Security-minded testing', 'White-box security testing and memory analysis to verify that sensitive data is handled responsibly.']
+];
+
+const skills = {
+  Testing: ['API testing (Postman & Newman)', 'Load & stress testing (k6, JMeter)', 'Functional and regression testing', 'White-box testing', 'Memory analysis'],
+  Languages: ['C#', 'C++', 'C', 'Java', 'SQL', 'HTML/CSS/JS', 'Python', 'TypeScript'],
+  Tools: ['Git', 'Linux', 'Postman', 'k6', 'Apache JMeter', 'Node.js', 'Neon', 'Vercel']
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: Astro.site,
+  sameAs: [site.github, site.linkedin].filter(isConfigured)
+};
 ---
 <BaseLayout title={`${site.name} | ${site.headline}`} description={`${site.name} is a ${site.role} focused on QA, API testing, and security-minded engineering.`} jsonLd={jsonLd}>
   <div class="container">
-    <section class="hero"><div><p class="eyebrow">{site.location}</p><h1>{site.name}</h1><p class="hero-subtitle">{site.headline}</p><p class="hero-intro">Final-year Computer Science student at the University of Sarajevo, building a careful practice around software quality, API testing, performance, and security. I like turning uncertain system behavior into clear evidence that teams can act on.</p>{isConfigured(site.availability) && <p class="chip">{site.availability}</p>}<div class="button-row"><a class="btn btn-primary" href="/projects">View projects</a><a class="btn btn-secondary" href={site.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div></div><div class="terminal-card" aria-hidden="true"><div class="terminal-top"><i></i><i></i><i></i></div><p class="terminal-line"><strong>$</strong> newman run petstore-collection.json</p><p class="terminal-line"><strong>$</strong> k6 run petstore-load-test.js</p><p class="terminal-line"><strong>$</strong> jmeter -n -t petstore-testplan.jmx</p><p class="terminal-line"><strong>$</strong> dotnet test AegisVault</p></div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">Focus</p><h2>What I focus on</h2></div><div class="focus-grid">{focusAreas.map(([title, text]) => <article class="focus-card"><h3>{title}</h3><p class="muted">{text}</p></article>)}</div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">Selected work</p><h2>Featured projects</h2><p>Practical projects spanning testing, application engineering, and security research.</p></div><div class="card-grid">{featuredProjects.map((project) => <ProjectCard project={project} />)}</div><p class="button-row"><a class="btn btn-ghost" href="/projects">View all projects →</a></p></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">Toolkit</p><h2>Skills</h2></div><div class="skills-grid">{Object.entries(skills).map(([group, items]) => <div class="skill-group"><h3>{group}</h3><ul class="tag-list">{items.map((item) => <li class="tag">{item}</li>)}</ul></div>)}</div></section>
-    <section class="section"><div class="section-heading"><p class="eyebrow">Education & experience</p><h2>A foundation in systems and collaboration</h2></div><div class="timeline"><article class="timeline-item"><p class="timeline-period">2026/27</p><h3>Erasmus+ exchange in Poland</h3><p class="muted">Erasmus+ exchange in Poland, 2026/27</p></article><article class="timeline-item"><p class="timeline-period">08/2025</p><h3>Cybersecurity exchange</h3><p class="muted">K1 Erasmus+ cybersecurity exchange, one week, Retteneg, Austria (08/2025)</p></article><article class="timeline-item"><p class="timeline-period">10/2023 - present</p><h3>BSc Computer Science</h3><p class="muted">Faculty of Electrical Engineering, University of Sarajevo.</p></article></div></section>
-    <section class="section"><div class="callout"><p class="eyebrow">Security notes</p><h2>Bandit writeups, kept practical</h2><p class="muted">A separate collection documenting OverTheWire Bandit levels with Markdown and terminal commands. Passwords and flags are intentionally omitted.</p><div class="button-row"><a class="btn btn-primary" href={site.bandit.site} target="_blank" rel="noopener noreferrer">Visit writeups ↗</a><a class="btn btn-secondary" href={site.bandit.repo} target="_blank" rel="noopener noreferrer">View repo ↗</a></div></div></section>
-    <section class="section"><div class="callout"><p class="eyebrow">Contact</p><h2>Let's talk</h2><p class="muted">For QA, software testing, and security-minded engineering conversations, find me through the links below.</p><div class="button-row"><a class="btn btn-primary" href={site.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>{isConfigured(site.email) && <a class="btn btn-secondary" href={`mailto:${site.email}`}>Email</a>}{isConfigured(site.linkedin) && <a class="btn btn-secondary" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}</div></div></section>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">{site.location}</p>
+        <h1>{site.name}</h1>
+        <p class="hero-subtitle">{site.headline}</p>
+        <p class="hero-intro">Final-year Computer Science student at the University of Sarajevo, building a careful practice around software quality, API testing, performance, and security. I like turning uncertain system behavior into clear evidence that teams can act on.</p>
+        {isConfigured(site.availability) && <p class="chip">{site.availability}</p>}
+        <div class="button-row">
+          <a class="btn btn-primary" href="/projects">View projects</a>
+          {hasCv && <a class="btn btn-secondary" href={site.cvPath} download>Download CV</a>}
+          <a class="btn btn-secondary" href={site.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="terminal-card" aria-hidden="true">
+        <div class="terminal-top"><i></i><i></i><i></i></div>
+        <p class="terminal-line"><strong>$</strong> newman run petstore-collection.json -e petstore-environment.json</p>
+        <p class="terminal-line"><strong>$</strong> k6 run petstore-load-test.js</p>
+        <p class="terminal-line"><strong>$</strong> k6 run smoke-test.js</p>
+        <p class="terminal-line"><strong>$</strong> ./autoRun.sh</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Focus</p>
+        <h2>What I focus on</h2>
+      </div>
+      <div class="focus-grid">
+        {focusAreas.map(([title, text]) => (
+          <article class="focus-card">
+            <h3>{title}</h3>
+            <p class="muted">{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Selected work</p>
+        <h2>Featured projects</h2>
+        <p>Practical projects spanning testing, application engineering, and security research.</p>
+      </div>
+      <div class="card-grid">
+        {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+      <p class="button-row">
+        <a class="btn btn-ghost" href="/projects">View all projects →</a>
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Toolkit</p>
+        <h2>Skills</h2>
+      </div>
+      <div class="skills-grid">
+        {Object.entries(skills).map(([group, items]) => (
+          <div class="skill-group">
+            <h3>{group}</h3>
+            <ul class="tag-list">
+              {items.map((item) => <li class="tag">{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Education & experience</p>
+        <h2>A foundation in systems and collaboration</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <p class="timeline-period">2026/27</p>
+          <h3>Erasmus+ exchange in Poland</h3>
+          <p class="muted">Studying at an Erasmus+ partner university in Poland.</p>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-period">08/2025</p>
+          <h3>Cybersecurity exchange</h3>
+          <p class="muted">K1 Erasmus+ cybersecurity exchange, one week, Retteneg, Austria (08/2025)</p>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-period">10/2023 - present</p>
+          <h3>BSc Computer Science</h3>
+          <p class="muted">Faculty of Electrical Engineering, University of Sarajevo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="callout">
+        <p class="eyebrow">Security notes</p>
+        <h2>Bandit writeups, kept practical</h2>
+        <p class="muted">A separate collection documenting OverTheWire Bandit levels with Markdown and terminal commands. Passwords and flags are intentionally omitted.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href={site.bandit.site} target="_blank" rel="noopener noreferrer">Visit writeups ↗</a>
+          <a class="btn btn-secondary" href={site.bandit.repo} target="_blank" rel="noopener noreferrer">View repo ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="callout">
+        <p class="eyebrow">Contact</p>
+        <h2>Let's talk</h2>
+        <p class="muted">For QA, software testing, and security-minded engineering conversations, find me through the links below.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href={site.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          {isConfigured(site.email) && <a class="btn btn-secondary" href={`mailto:${site.email}`}>Email</a>}
+          {isConfigured(site.linkedin) && <a class="btn btn-secondary" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}
+        </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>

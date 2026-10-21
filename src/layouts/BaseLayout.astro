@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../config/site';
+import { site, isConfigured } from '../config/site';
 import '@fontsource-variable/inter';
 import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
@@ -10,7 +10,7 @@ interface Props { title?: string; description?: string; ogImage?: string; jsonLd
 const { title = `${site.name} | ${site.headline}`, description = `${site.name}, ${site.role}, focused on QA, API testing, and security-minded engineering.`, ogImage = '/favicon.svg', jsonLd } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
-const sameAs = [site.github, site.linkedin].filter((value) => value.length > 0);
+const sameAs = [site.github, site.linkedin].filter(isConfigured);
 const personLd = jsonLd ?? { '@context': 'https://schema.org', '@type': 'Person', name: site.name, url: Astro.site, jobTitle: site.role, sameAs };
 ---
 <!doctype html>

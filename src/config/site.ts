@@ -29,6 +29,8 @@ export const site = {
   ] satisfies SiteLink[],
 } as const;
 
-export function isConfigured(value: string) {
-  return value.length > 0 && !value.startsWith('TODO');
+export function isConfigured(value: string | undefined): boolean {
+  if (!value) return false;
+  const trimmed = value.trim();
+  return trimmed.length > 0 && trimmed.toLowerCase() !== 'none';
 }
