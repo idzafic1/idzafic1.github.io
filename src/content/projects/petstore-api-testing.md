@@ -23,7 +23,7 @@ Comprehensive quality assurance, verification, and performance evaluation suite 
 
 ## My role
 
-Sole author and QA engineer. Responsible for designing Postman collections, automating test execution via Newman CLI, scripting k6 multi-scenario load profiles, configuring Apache JMeter thread groups with APDEX metrics, and authoring formal verification reports.
+Sole author and QA engineer. Responsible for authoring Postman collections, automating test execution via Newman CLI, scripting k6 multi-scenario load profiles, configuring Apache JMeter thread groups with APDEX metrics, and compiling formal verification reports.
 
 ## Approach
 

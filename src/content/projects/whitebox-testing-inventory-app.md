@@ -22,7 +22,7 @@ A quality assurance and code optimization project evaluating a C# .NET inventory
 
 ## My role
 
-Quality engineer and code auditor. Responsible for constructing control flow graphs, calculating cyclomatic complexity across business logic methods, designing unit test suites for 100% branch and path coverage, and implementing performance tuning.
+Quality engineer and code auditor. Responsible for constructing control flow graphs, calculating cyclomatic complexity across business logic methods, implementing unit test suites for 100% branch and path coverage, and executing performance tuning.
 
 ## Approach
 
