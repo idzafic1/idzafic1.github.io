@@ -17,7 +17,7 @@ highlights: [
 
 ## Overview
 
-AegisVault is a secure desktop application built in C#/.NET 10 (WPF / Caliburn.Micro) designed for local storage and encryption of sensitive files using next-generation post-quantum cryptography (PQC) and classical hybrid cryptographic standards. Developed as a practical Bachelor's thesis project on cryptographic algorithm application for sensitive data protection.
+AegisVault is a secure desktop application built in C#/.NET 10 (WPF / Caliburn.Micro) designed for local storage and encryption of sensitive files using next-generation post-quantum cryptography (PQC) and classical hybrid cryptographic standards. Developed as a practical BSc thesis project on cryptographic algorithm application for sensitive data protection.
 
 ## My role
 
