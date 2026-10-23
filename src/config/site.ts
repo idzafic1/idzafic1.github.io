@@ -6,7 +6,7 @@ export interface SiteLink {
 
 export const site = {
   name: 'Ismail Džafić',
-  role: "BSc in Computer Science, first-year master's student",
+  role: "BSc in Computer Science (completed), first-year master's student",
   headline: 'QA, API testing & security-minded engineering',
   location: 'Sarajevo, Bosnia and Herzegovina',
   email: 'idzafic1@etf.unsa.ba',

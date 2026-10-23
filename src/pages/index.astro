@@ -32,14 +32,14 @@ const jsonLd = {
   sameAs: [site.github, site.linkedin].filter(isConfigured)
 };
 ---
-<BaseLayout title={`${site.name} | ${site.headline}`} description={`${site.name} holds a BSc in Computer Science and is a first-year master's student focused on QA, API testing, and security-minded engineering.`} jsonLd={jsonLd}>
+<BaseLayout title={`${site.name} | ${site.headline}`} description={`${site.name} holds a BSc in Computer Science (completed) and is a first-year master's student focused on QA, API testing, and security-minded engineering.`} jsonLd={jsonLd}>
   <div class="container">
     <section class="hero">
       <div>
         <p class="eyebrow">{site.location}</p>
         <h1>{site.name}</h1>
         <p class="hero-subtitle">{site.headline}</p>
-        <p class="hero-intro">I hold a BSc in Computer Science from the University of Sarajevo and am a first-year master's student, building a careful practice around software quality, API testing, performance, and security. I like turning uncertain system behavior into clear evidence that teams can act on.</p>
+        <p class="hero-intro">First-year master's student with a BSc in Computer Science (completed), building a careful practice around software quality, API testing, performance, and security. I like turning uncertain system behavior into clear evidence that teams can act on.</p>
         {isConfigured(site.availability) && <p class="chip">{site.availability}</p>}
         <div class="button-row">
           <a class="btn btn-primary" href="/projects">View projects</a>
@@ -109,9 +109,7 @@ const jsonLd = {
       </div>
       <div class="timeline">
         <article class="timeline-item">
-          <p class="timeline-period">10/2026 - present</p>
-          <h3>MSc Computer Science</h3>
-          <p class="muted">Faculty of Electrical Engineering, University of Sarajevo.</p>
+          <h3>First-year master's student</h3>
         </article>
         <article class="timeline-item">
           <p class="timeline-period">2026/27</p>
@@ -124,8 +122,7 @@ const jsonLd = {
           <p class="muted">K1 Erasmus+ cybersecurity exchange, one week, Retteneg, Austria (08/2025)</p>
         </article>
         <article class="timeline-item">
-          <p class="timeline-period">10/2023 - 07/2026</p>
-          <h3>BSc Computer Science</h3>
+          <h3>BSc in Computer Science (completed)</h3>
           <p class="muted">Faculty of Electrical Engineering, University of Sarajevo.</p>
         </article>
       </div>

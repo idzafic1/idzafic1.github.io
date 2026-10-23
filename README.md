@@ -1,6 +1,6 @@
 # Ismail Džafić — Personal Portfolio
 
-A clean, fast, and accessible portfolio website for Ismail Džafić, BSc in Computer Science graduate and first-year master's student at the University of Sarajevo focusing on QA, automated API testing, and software security.
+A clean, fast, and accessible portfolio website for Ismail Džafić, first-year master's student with a BSc in Computer Science (completed) focusing on QA, automated API testing, and software security.
 
 Built with **Astro (Static Output)**, typed **Content Collections**, and pure **CSS** with responsive light/dark mode.
 
