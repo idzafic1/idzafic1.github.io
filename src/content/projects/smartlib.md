@@ -21,7 +21,7 @@ A collaborative C#-based library management system featuring a real-time book ca
 
 ## My role
 
-Team member in an 8-person engineering team. Contributing to backend service modules and database integration.
+Team of 8, in progress.
 
 ## Approach
 
@@ -30,7 +30,3 @@ The system connects to a cloud-hosted TiDB relational database instance and util
 ## Results
 
 Core data schemas, catalog search, and reservation workflows are implemented and actively maintained in staging.
-
-## What I learned
-
-To be added (project currently in progress).

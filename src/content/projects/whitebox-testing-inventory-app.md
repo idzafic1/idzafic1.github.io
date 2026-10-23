@@ -1,7 +1,7 @@
 ---
 title: "White-Box Testing & Code Tuning: Inventory Console App"
 summary: "Structural testing, McCabe cyclomatic complexity analysis, control flow graphs, and performance code tuning for a C# .NET inventory system."
-role: "Software Quality Engineer"
+role: "Academic QA project"
 tech: ["C#", ".NET", "White-Box Testing", "McCabe Complexity", "Unit Testing", "Code Metrics"]
 repo: "https://github.com/idzafic1/inventoryConsoleApp"
 report: "https://github.com/idzafic1/loadTestPetStoreAPI/blob/main/docs/reports/whitebox-testing-and-refactoring-report.pdf"
@@ -22,11 +22,11 @@ A quality assurance and code optimization project evaluating a C# .NET inventory
 
 ## My role
 
-Quality engineer and code auditor. Responsible for constructing control flow graphs, calculating cyclomatic complexity across business logic methods, implementing unit test suites for 100% branch and path coverage, and executing performance tuning.
+Academic QA project.
 
 ## Approach
 
-- **Complexity Mapping**: Generated control flow graphs (CFG) for core inventory methods (`AnalizirajObavjestenja`, `AnalizirajPerformanseNarudzbi`, `AnalizirajStanjeInventara`, `AnalizirajDobavljaca`) and computed cyclomatic complexity $V(G) = E - N + 2P$.
+- **Complexity Mapping**: Generated control flow graphs (CFG) for core inventory methods (`AnalizirajObavjestenja`, `AnalizirajPerformanseNarudzbi`, `AnalizirajStanjeInventara`, `AnalizirajDobavljaca`) and computed cyclomatic complexity V(G) = E - N + 2P.
 - **Path & Condition Coverage**: Derived basis path test suites verifying every execution path, condition combination, loop boundary, and exception handler.
 - **Performance Code Tuning**: Applied targeted C# optimizations in performance-critical execution paths:
   - Replacing string concatenation with `StringBuilder` to eliminate intermediate heap allocations.
@@ -40,8 +40,4 @@ Quality engineer and code auditor. Responsible for constructing control flow gra
 - Formulated 100% basis path and condition test coverage across evaluated business logic methods.
 - Measurably reduced execution time and memory footprint in data aggregation routines through loop hoisting and collection tuning.
 - Verified significant improvements in Maintainability Index (MI) and reductions in Cyclomatic Complexity post-refactoring.
-- Detailed in the 60-page [White-Box Testing & Refactoring Report](https://github.com/idzafic1/loadTestPetStoreAPI/blob/main/docs/reports/whitebox-testing-and-refactoring-report.pdf).
-
-## What I learned
-
-High test coverage alone does not ensure code efficiency. Combining formal white-box path analysis with memory allocation profiling and micro-optimizations yields systems that are both rigorously verifiable and performant under load.
+- Detailed in a 60-page report: [White-Box Testing & Refactoring Report](https://github.com/idzafic1/loadTestPetStoreAPI/blob/main/docs/reports/whitebox-testing-and-refactoring-report.pdf).

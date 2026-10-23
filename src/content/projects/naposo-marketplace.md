@@ -24,7 +24,7 @@ A C#-based two-sided service marketplace connecting local service providers with
 
 ## My role
 
-Team member in a team of 4. Contributed to core C# application workflows, backend data modeling, and testing.
+Team of 4.
 
 ## Approach
 
@@ -33,7 +33,3 @@ The platform supports distinct user roles (clients and service providers), servi
 ## Results
 
 Delivered a functional marketplace web application meeting team requirements. Complete source code is publicly accessible in the repository.
-
-## What I learned
-
-Collaborative application development requires continuous alignment on shared interface contracts, Git workflows, and structured task division across team members.
